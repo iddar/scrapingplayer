@@ -24,29 +24,20 @@ function exec(error, response, html){
   let $ = cheerio.load(html)
   let pages = $('.pagination>li').length - 4 // clean items no required
   let list =  $('.download-icon') // get sound box
-  let soundsUrl = list2array(list)
+  let songsUrl = list2array(list)
 
-  // request(soundsUrl[0], function(err, res, html){
-  //   console.log(html)
-  // })
-
-  async.eachSeries(soundsUrl, play, function(err) {
+  async.eachSeries(songsUrl, play, function(err) {
     console.log(":( Ya no hay rolas...")
   })
-
-
-  //.pipe(fs.createWriteStream( path.join(tmpDir, 'rola1.mp3') ) )
-  //async.map(soundsUrl, link2mp3, callback)
-
 }
 
 function list2array(list){
   // create array urlSound
-  let sounds = new Array()
+  let songs = new Array()
   _.forEach(list , function getArray(item){
-    sounds.push(item.attribs.href)
+    songs.push(item.attribs.href)
   })
-  return sounds
+  return songs
 }
 
 function callback(err, result){
@@ -63,18 +54,6 @@ function play(sound, callback){
 
     function onPlaying(f) {
       var speaker = new Speaker(f);
-      //
-      // self.speaker = {};
-      // self.speaker.readableStream = this;
-      // self.speaker.Speaker = speaker;
-      //self.emit('playing', song);
-
-
-      //show(song);
-
-      // This is where the song acturaly played end,
-      // can't trigger playend event here cause
-      // unpipe will fire this speaker's close event.
       this.pipe(speaker).once('close', function() {
         console.log("Se acabo la rola")
       });
@@ -86,21 +65,3 @@ function play(sound, callback){
     }
 
 }
-//
-// function show(song) {
-//   var name = song['src'].split('/').pop();
-//   var total = 70;
-//   var parser = mm(fs.createReadStream(name), {
-//     duration: true
-//   }, function(err, metadata) {
-//     if (err) {
-//       console.log('Now playing: ' + name + ' (No metadata found)');
-//       return;
-//     }
-//     var info = metadata.title;
-//     var duration = parseInt(metadata.duration);
-//     var dots = total - 1;
-//     var speed = (duration * 1000) / total;
-//     console.log(info)
-//   });
-// }
