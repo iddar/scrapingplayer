@@ -5,8 +5,13 @@
   "main"         : "server.js",
   "author"       : "Scotch",
   "dependencies" : {
-    "lodash"    : "latest",
-    "request"    : "latest",
-    "cheerio"    : "latest"
+    "lodash" : "latest",
+    "request" : "latest",
+    "cheerio" : "latest",
+    "async" : "latest",
+    "player": "git+https://github.com/iddar/player.git",
+    "lame": "latest",
+    "speaker": "latest",
+    "musicmetadata": "latest"
   }
 }
